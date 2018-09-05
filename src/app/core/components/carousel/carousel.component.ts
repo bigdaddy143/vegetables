@@ -1,0 +1,56 @@
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { RewardService } from '../../services/reward.service';
+import { Reward } from '../../models/rewards.model';
+
+@Component({
+  selector: 'app-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.css']
+})
+export class CarouselComponent implements OnInit {
+  // private variable declarations
+  private _userId: number;
+
+  // public variable declarations
+  public carouselItems = [];
+
+  constructor(
+      private _userService: UserService,
+      private _rewardService: RewardService
+  ) { }
+
+  ngOnInit() {
+    this._userId = this._userService.getUserId();
+    this.getRewards();
+  }
+
+  getRewards() {
+    this.carouselItems = this._userId ? this._rewardService.getMockedCarouselRewards(this._userId) : [];
+    return this.carouselItems;
+  }
+
+  /**
+   * Updates the selected reward for the current user.
+   * @param reward The reward that the user has selected from the carousel
+   */
+  updateSelectedReward(reward: Reward) {
+    // Confirm that this isn't already the selected reward for the user
+    if (!reward.Selected) {
+      // currently stubbed out, will need to switch this to subscribe to an observable and throw an error if unsuccesful
+      // the service will go unselect the other reward item on the backend
+      // on the front end we probably dont want to wait for this to take place and can just do it shorthand in the meantime
+      this._rewardService.setSelectedReward(this._userId, reward.RewardId);
+    }
+
+    // just doing this short hand for now, looping back through the other items and unselecting
+    this.carouselItems.forEach( rewardItem => {
+      if (rewardItem !== reward) {
+        rewardItem.Selected = false;
+      }
+    });
+
+    // updating the value on the reward passed in
+    reward.Selected = true;
+  }
+}
