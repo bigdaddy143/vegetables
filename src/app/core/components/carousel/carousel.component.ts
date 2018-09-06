@@ -6,7 +6,7 @@ import { Reward } from '../../models/rewards.model';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css']
+  styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit {
   // private variable declarations
