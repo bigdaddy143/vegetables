@@ -13,11 +13,12 @@ export class CarouselComponent implements OnInit {
   private _userId: number;
 
   // public variable declarations
-  public carouselItems = [];
+  public carouselItems: Reward[];
+  public originalCarouselItems: Reward[];
 
   constructor(
-      private _userService: UserService,
-      private _rewardService: RewardService
+    private _userService: UserService,
+    private _rewardService: RewardService
   ) { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class CarouselComponent implements OnInit {
 
   getRewards() {
     this.carouselItems = this._userId ? this._rewardService.getMockedCarouselRewards(this._userId) : [];
+    this.originalCarouselItems = this.carouselItems;
     return this.carouselItems;
   }
 
@@ -44,7 +46,7 @@ export class CarouselComponent implements OnInit {
     }
 
     // just doing this short hand for now, looping back through the other items and unselecting
-    this.carouselItems.forEach( rewardItem => {
+    this.carouselItems.forEach(rewardItem => {
       if (rewardItem !== reward) {
         rewardItem.Selected = false;
       }
@@ -52,5 +54,20 @@ export class CarouselComponent implements OnInit {
 
     // updating the value on the reward passed in
     reward.Selected = true;
+  }
+
+  /**
+   * As the user enters values into the reward search, filter the list
+   * @param searchValue
+   */
+  onRewardsSearch(event: any) {
+    const searchValue = event.srcElement.value;
+    if (searchValue === '' || typeof (searchValue) === 'undefined' || searchValue === null) {
+      this.carouselItems = this.originalCarouselItems;
+    } else {
+      this.carouselItems = this.carouselItems.filter(reward => {
+        return reward.RewardName.includes(searchValue);
+      });
+    }
   }
 }
