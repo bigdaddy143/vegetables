@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "salad-ui": {
+    "angular-cli-electron": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -18,7 +18,9 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/package.json",
+              "src/electron.prod.js"
             ],
             "styles": [
               "src/styles.scss"
@@ -48,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "salad-ui:build"
+            "browserTarget": "angular-cli-electron:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "salad-ui:build:production"
+              "browserTarget": "angular-cli-electron:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "salad-ui:build"
+            "browserTarget": "angular-cli-electron:build"
           }
         },
         "test": {
@@ -75,7 +77,9 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/package.json",
+              "src/electron.prod.js"
             ]
           }
         },
@@ -93,16 +97,16 @@
         }
       }
     },
-    "salad-ui-e2e": {
-      "root": "e2e",
-      "sourceRoot": "e2e",
+    "angular-cli-electron-e2e": {
+      "root": "",
+      "sourceRoot": "",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "salad-ui:serve"
+            "devServerTarget": "angular-cli-electron:serve"
           }
         },
         "lint": {
@@ -119,11 +123,11 @@
       }
     }
   },
-  "defaultProject": "salad-ui",
+  "defaultProject": "angular-cli-electron",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

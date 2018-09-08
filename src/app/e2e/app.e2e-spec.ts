@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('salad-ui App', () => {
+describe('angular-cli-electron App', () => {
   let page: AppPage;
 
   beforeEach(() => {
