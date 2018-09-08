@@ -1,8 +1,13 @@
+// 1024x768 is the most common screen resolution size recognized
+$height: 768px;
+$width: 1024px;
+
 .dashboard {
-    height: 100%;
-    width: 100%;
+    height: $height;
+    width: $width;
     display: flex;
     flex-direction: row;
+    background-color: gray;
     
     .left-dashboard {
         width: 35%
@@ -11,6 +16,8 @@
         width: 40%;
     }
     .right-dashboard {
+        display: flex;
+        flex-direction: column;
         width: 25%;
     }
 }

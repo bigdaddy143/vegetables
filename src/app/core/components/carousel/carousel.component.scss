@@ -1,23 +1,77 @@
+$width: 10em;
+$color: green;
+
+.carousel-item{
+  width: $width;
+  height: $width;
+  display: block;
+  background-color: $color;
+  
+}
+
 .carousel{
     display: flex;
     flex-direction: column;
     background-color: gray;
-    height: 45%;
+    height: 95%;
     width: 100%;
     overflow: scroll;
     
     .carousel-item {
         cursor: pointer;
         display: flex;
+        flex-direction: row;
         font-size: .5em;
-        flex-direction: column;
-        border: .25em;
-        border: 4px solid green;
         width: 20em;
         height: 5em;
         margin: 3em;
         padding-bottom: 2em;
 
+        .carousel-item-left {
+            margin: 20px;
+            
+            &:after{
+                content:""; 
+                display: block;
+                position: relative;
+            } 
+                
+            &.br:after{
+                left:$width;
+                border-top: $width/2 solid transparent;
+                border-right: $width/2 solid transparent;
+                border-bottom: $width/2 solid $color;
+                    border-left: $width/2 solid $color;
+            }
+                
+            &.tl:after{
+                left:-1 * $width;
+                border-top: $width/2 solid $color;
+                border-right: $width/2 solid $color;
+                border-bottom: $width/2 solid transparent;
+                    border-left: $width/2 solid transparent;
+            }
+                
+            &.tr:after{
+                left:$width;
+                border-top: $width/2 solid $color;
+                border-right: $width/2 solid transparent;
+                border-bottom: $width/2 solid transparent;
+                    border-left: $width/2 solid $color ;
+            }
+            &.bl:after{
+                left:-1 * $width;
+                border-top: $width/2 solid transparent;
+                border-right: $width/2 solid $color;
+                border-bottom: $width/2 solid $color;
+                    border-left: $width/2 solid transparent;
+            }
+        }
+        .carousel-item-right {
+            border: 4px solid green;
+            display: flex;
+            flex-direction: column;
+        }
         .selected-reward {
            color: red;            
         }
