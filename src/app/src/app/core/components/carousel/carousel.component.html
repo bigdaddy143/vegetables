@@ -1,12 +1,11 @@
+<div class="reward-search">
+  <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
+</div>
 <div class="carousel">
-  <div class="reward-search">
-    <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
-  </div>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
-
     <div *ngFor="let rewardItem of carouselItems">
       <div (click)="updateSelectedReward(rewardItem)" class="carousel-item">
-        <div class="carousel-item-left bl">
+        <div class="carousel-item-left">
 
         </div>
         <div class="carousel-item-right">
