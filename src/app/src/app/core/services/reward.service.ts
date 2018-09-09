@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpRequest } from 'selenium-webdriver/http';
-import { Reward } from '../models/rewards.model';
+import { Reward, RewardDto } from '../models/rewards.model';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
+import { map } from 'rxjs/operators';
 import * as _ from "lodash";
 
 @Injectable()
@@ -21,15 +22,11 @@ export class RewardService {
   //  * @param {number} userID the id of the user requesting a list of rewards
   // */
   getCarouselRewards(userId: number): Observable<Reward[]> { 
-    return this._http.get<Reward[]>(this._url)
-      // .map((res: Response) => {
-      //   const poopoo = 5;
-      //   return res.json();
-      // })
-      // .catch((error: any) => {
-      //   const poopoo = 5;
-      //   return Observable.throw(error.json().error || 'There was an error retrieving rewards.')})
-      // };
+    return this._http.get(this._url).pipe(
+    map((json: RewardDto) => {
+  //  _.orderBy(this.mapPercentageHeight(json.rewards), ['price'], ['desc'])
+  return json.rewards
+    }));
   }
 
   /**
@@ -56,12 +53,12 @@ export class RewardService {
 
   mapPercentageHeight(rewards: Reward[]): Reward[] {
     const maxRewardPrice = _.maxBy(rewards, 'price').price;
-    const selectedRewardPrice = rewards.find(r => r.selected).price;
+    const selectedReward = rewards.find(r => r.selected);
 
-    return rewards.map(reward => ({
+    return selectedReward ? rewards.map(reward => ({
       ...reward, 
-      percentageHeight: this.calculatePlacementPercentage(reward.price, selectedRewardPrice, maxRewardPrice)
-    }));
+      percentageHeight: this.calculatePlacementPercentage(reward.price, selectedReward.price, maxRewardPrice)
+    })) : rewards;
   }
 
   /**

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { UserService } from '../../services/user.service';
 import { RewardService } from '../../services/reward.service';
 import { Reward } from '../../models/rewards.model';
@@ -27,11 +28,12 @@ export class CarouselComponent implements OnInit {
   }
 
   getRewards() {
-    this.originalCarouselItems = this._rewardService.getMockedCarouselRewards(this._userId);
-    // .subscribe(result => {
-    //   this.carouselItems = result
-    // }) : [];
-    this.carouselItems = this.originalCarouselItems;
+    this._rewardService.getCarouselRewards(this._userId)
+    .subscribe(rewards => {
+      const s = _.orderBy(this._rewardService.mapPercentageHeight(rewards), ['price'], ['desc']);
+      this.carouselItems = _.orderBy(this._rewardService.mapPercentageHeight(rewards), ['price'], ['desc']);
+    });
+    // this.carouselItems = this.originalCarouselItems;
     return this.carouselItems;
   }
 
