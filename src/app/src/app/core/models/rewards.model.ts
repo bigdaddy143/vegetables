@@ -5,6 +5,7 @@ export class Reward {
   details: string;
   imageLink: string;
   selected: boolean; // need to determine if the backend is storing selected state
+  percentageHeight: number;
 }
 
 

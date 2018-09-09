@@ -57,6 +57,9 @@ export class CarouselComponent implements OnInit {
 
     // updating the value on the reward passed in
     reward.selected = true;
+
+    //set new percentage height of rewards
+    this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
   }
 
   /**
