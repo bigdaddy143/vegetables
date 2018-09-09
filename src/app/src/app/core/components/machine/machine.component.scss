@@ -1,11 +1,37 @@
+@import '~styles.scss';
+
 .machines-container{
     display: flex;
     flex-direction: column;
+    padding-left: 47.5%;
 
+   
+    .machines-header {
+        cursor: pointer;
+
+        .my-machines {
+            font-size: $small;
+            color: white;
+            font-weight: $normal;
+            padding-left: .5em;
+        }
+
+        .up-caret {
+            color: white;
+            -webkit-transform: rotate(90deg); /* Safari and Chrome */
+        }
+        .down-caret {   
+            color: red;
+        }
+    }
+    
     .machine {
-        border-width: 2px;
-        border-color: black;
         padding: .5em;
-        font-size: .5em;
+
+        .machine-name {
+            font-size: $medium;
+            font-weight: $bold;
+            color: $lightGreen;
+        }   
     }
 }

@@ -1,7 +1,13 @@
 <div class="machines-container">
-  <ng-container *ngFor="let machine of machineList">
-    <div class="machine">
-      <span>{{machine.Name}}</span>
+  <div (click)="toggleMachineList()" class="machines-header">
+    <span [ngClass]="{'up-caret': !showMachines, 'down-caret': showMachines}">&lsaquo;</span>
+    <span class="my-machines">MY MACHINES</span>
+  </div>
+  <ng-container *ngIf="showMachines">
+    <div *ngFor="let machine of machineList">
+      <div class="machine">
+        <span class="machine-name">{{machine.Name}}</span>
+      </div>
     </div>
   </ng-container>
 </div>

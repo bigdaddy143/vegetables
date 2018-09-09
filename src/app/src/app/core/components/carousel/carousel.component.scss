@@ -1,13 +1,10 @@
 @import '~styles.scss';
 
-$carouselItemWidth: 10em;
 $rewardHeight: 75px;
 
 
-
-.carousel-item{
-  width: $carouselItemWidth;
-  display: block;  
+.reward-search {
+    padding-bottom: 1em;
 }
 
 .carousel{
@@ -49,16 +46,22 @@ $rewardHeight: 75px;
                 color: $lightGreen;
             }
 
-            .reward-name {
-                font-size: $large;
-                font-weight: $semiBold;
-                color: $lightGreen;
-            }
+            .reward-name-price {
+                display: flex;
+                flex-direction: row;
+                
+                .reward-name {
+                    font-size: $large;
+                    font-weight: $semiBold;
+                    color: $lightGreen;
+                }   
 
-            .reward-price {
-                font-size: $small;
-                font-weight: $normal;
-                color: $darkBlue;
+                .reward-price {
+                    font-size: $small;
+                    font-weight: $normal;
+                    color: $darkBlue;
+                    text-align: right;
+                }
             }
         }
 

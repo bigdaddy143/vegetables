@@ -12,6 +12,7 @@ import { MachineService } from './core/services/machine.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

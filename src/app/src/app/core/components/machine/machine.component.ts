@@ -13,6 +13,7 @@ export class MachineComponent implements OnInit {
 
   // public variable declarations
   public machineList: Machine[];
+  public showMachines = false;
 
   constructor(
     private _machineService: MachineService
@@ -27,5 +28,9 @@ export class MachineComponent implements OnInit {
    */
   getMachines() {
     this.machineList = this._machineService.getMockedMachines(this._userId);
+  }
+
+  toggleMachineList() {
+    this.showMachines = !this.showMachines;
   }
 }
