@@ -1,16 +1,18 @@
-$width: 10em;
+@import '~styles.scss';
+
+$carouselItemWidth: 10em;
 $rewardHeight: 75px;
-$backgroundColor: green;
+
+
 
 .carousel-item{
-  width: $width;
+  width: $carouselItemWidth;
   display: block;  
 }
 
 .carousel{
     display: flex;
     flex-direction: column;
-    background-color: gray;
     height: 95%;
     width: 100%;
     overflow: scroll;
@@ -19,28 +21,51 @@ $backgroundColor: green;
         cursor: pointer;
         display: flex;
         flex-direction: row;
-        font-size: .5em;
-        width: 80%;
         height: $rewardHeight;
-        margin: 3em;
-        padding-bottom: 2em;
+        margin: .25em;
+        width: 100%;
+        padding-bottom: .5em;
 
         .carousel-item-left {
-            width: 60px;
+            width: 40px;
             height: 0;
             border-style: solid;
             border-width: 0 0 $rewardHeight $rewardHeight;
-            border-color: transparent transparent $backgroundColor transparent;
+            border-color: transparent transparent $greenBackgroundColor transparent;
+            margin-right: .25em;
+
         }
 
         .carousel-item-right {
-            border: 4px solid $backgroundColor;
+            border: 4px solid $greenBackgroundColor;
             display: flex;
             flex-direction: column;
-            background-color: $backgroundColor;
+            background-color: $greenBackgroundColor;
+            width: 200px;
+
+            .time-remaining {
+                font-size: $small;
+                font-weight: $normal;
+                color: $lightGreen;
+            }
+
+            .reward-name {
+                font-size: $large;
+                font-weight: $semiBold;
+                color: $lightGreen;
+            }
+
+            .reward-price {
+                font-size: $small;
+                font-weight: $normal;
+                color: $darkBlue;
+            }
         }
+
         .selected-reward {
-           color: red;            
+           color: $red;      
+           font-size: $medium;
+           font-weight: $veryBold;      
         }
         
 
