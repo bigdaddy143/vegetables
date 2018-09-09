@@ -1,4 +1,67 @@
+@import '~styles.scss';
+
+
 .income-container {
-    background-color: gray;
-    height: 45%;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .25em;
+
+    .income-container-left {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 100px 100px 0;
+        border-color: transparent #000000 transparent transparent;
+    }
+
+    .income-container-right {
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        width: 100%;
+        height: 100px;
+
+
+        .current-balance-title {
+            font-size: $small;
+            color: whitesmoke;
+        }
+
+        .current-balance-value {
+            font-size: $large;
+            color: $lightGreen
+        }
+
+        .current-balance-currency {
+            font-size: $small;
+            color: whitesmoke;
+        }
+    }
+}
+
+.referral-container {
+    display: flex;
+    flex-direction: row;
+    padding-left: 40%;
+
+    .referral-container-left {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 20px 20px 0;
+        border-color: transparent $greenBackgroundColor transparent transparent;
+    }
+
+    .referral-container-right {
+        background-color: $greenBackgroundColor;
+        width: 100%;
+
+        .referral-text {
+            font-size: $small;
+            color: $darkBlue;
+            font-weight: $semiBold;
+        }
+    }
+    
 }
