@@ -10,3 +10,7 @@ export class Reward {
 }
 
 
+export class RewardDto {
+  success: boolean;
+  rewards: Reward[];
+}
