@@ -9,12 +9,12 @@
 
         </div>
         <div class="carousel-item-right">
-          <span>Name: {{rewardItem.RewardName}}</span>
-          <span>Id: {{rewardItem.RewardId}}</span>
-          <span>Value: {{rewardItem.RewardValue | currency:'USD'}}</span>
-          <span>Description: {{rewardItem.RewardDescription}}</span>
-          <span [ngClass]="{'selected-reward': rewardItem.Selected}">Selected: {{rewardItem.Selected}}</span>
-          <img class="item-icon" src="./../../../../assets/images/favicon.ico">
+          <span>Name: {{rewardItem.name}}</span>
+          <span>Id: {{rewardItem.rewardId}}</span>
+          <span>Value: {{rewardItem.price | currency:'USD'}}</span>
+          <span>Description: {{rewardItem.details}}</span>
+          <span [ngClass]="{'selected-reward': rewardItem.selected}">Selected: {{rewardItem.selected}}</span>
+          <!-- <img class="item-icon" src="rewardItem.imageLink"> -->
         </div>
       </div>
     </div>

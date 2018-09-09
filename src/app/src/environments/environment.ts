@@ -5,7 +5,6 @@
 
 export const environment = {
   production: false,
-  endpoint: 'https://api-salad.io/',
-  apiVersion: 'V1'
-
+  endpoint: 'http://ec2-54-183-223-31.us-west-1.compute.amazonaws.com:3000/',
+  apiVersion: ''
 };

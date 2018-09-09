@@ -3,6 +3,7 @@ import { CarouselComponent } from './carousel.component';
 import { UserService } from '../../services/user.service';
 import { RewardService } from '../../services/reward.service';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -10,14 +11,15 @@ import { CommonModule } from '@angular/common';
         CarouselComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        HttpClientModule
     ],
     exports: [
         CarouselComponent
     ],
     providers: [
         UserService,
-        RewardService
+        RewardService,
     ]
 })
 export class CarouselModule { }
