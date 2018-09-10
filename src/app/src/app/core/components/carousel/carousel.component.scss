@@ -10,9 +10,9 @@ $rewardHeight: 75px;
 .carousel{
     display: flex;
     flex-direction: column;
-    height: 95%;
+    height: 60%;
     width: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
     
     .carousel-item {
         cursor: pointer;

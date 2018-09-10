@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { RewardService } from '../../services/reward.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -12,7 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
     ],
     imports: [
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        ScrollDispatchModule
     ],
     exports: [
         CarouselComponent

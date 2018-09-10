@@ -21,11 +21,10 @@ export class RewardService {
   //  * Calls the api for a list of rewards associated to a user.
   //  * @param {number} userID the id of the user requesting a list of rewards
   // */
-  getCarouselRewards(userId: number): Observable<Reward[]> { 
+  getCarouselRewards(userId: number): Observable<Reward[]> {
     return this._http.get(this._url).pipe(
     map((json: RewardDto) => {
-  //  _.orderBy(this.mapPercentageHeight(json.rewards), ['price'], ['desc'])
-  return json.rewards
+      return _.orderBy(this.mapPercentageHeight(json.rewards), ['price'], ['desc'])
     }));
   }
 
@@ -53,12 +52,16 @@ export class RewardService {
 
   mapPercentageHeight(rewards: Reward[]): Reward[] {
     const maxRewardPrice = _.maxBy(rewards, 'price').price;
-    const selectedReward = rewards.find(r => r.selected);
+    const selectedReward = this.getSelectedReward(rewards);
 
     return selectedReward ? rewards.map(reward => ({
       ...reward, 
       percentageHeight: this.calculatePlacementPercentage(reward.price, selectedReward.price, maxRewardPrice)
     })) : rewards;
+  }
+
+  getSelectedReward(rewards: Reward[]): Reward {
+    return rewards.find(r => r.selected);
   }
 
   /**
@@ -82,6 +85,16 @@ export class RewardService {
     }
     //else the item is the selected item
     return .5;
+  }
+
+  /**
+   * Returns the selected reward otherwise returns the reward
+   * with the middle price
+   * @param rewards list of rewards
+   * @param selectedReward selected reward
+   */
+  getMiddlePricedReward(rewards: Reward[], selectedReward?: Reward): Reward {
+    return selectedReward ? selectedReward : rewards[_.ceil(rewards.length / 2)];
   }
 
   /**

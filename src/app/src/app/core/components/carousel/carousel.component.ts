@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CdkScrollable, ScrollDispatcher, ScrollDispatchModule } from '@angular/cdk/scrolling';
 import * as _ from 'lodash';
 import { UserService } from '../../services/user.service';
 import { RewardService } from '../../services/reward.service';
@@ -15,26 +16,32 @@ export class CarouselComponent implements OnInit {
 
   // public variable declarations
   public carouselItems: Reward[];
+  public selectedReward: Reward;
+  public scrolledToReward: Reward;
   public originalCarouselItems: Reward[];
+  private currentScrollTop: number;
 
   constructor(
     private _userService: UserService,
     private _rewardService: RewardService
   ) { }
+  @ViewChild(CdkScrollable) scrollable: CdkScrollable;
+  // @ViewChild('scrollingElement') scrollingElement: ElementRef<HTMLElement>;
 
   ngOnInit() {
     this._userId = this._userService.getUserId();
-    this.getRewards();
+    this.initRewards();
   }
 
-  getRewards() {
-    this._rewardService.getCarouselRewards(this._userId)
-    .subscribe(rewards => {
-      const s = _.orderBy(this._rewardService.mapPercentageHeight(rewards), ['price'], ['desc']);
-      this.carouselItems = _.orderBy(this._rewardService.mapPercentageHeight(rewards), ['price'], ['desc']);
-    });
-    // this.carouselItems = this.originalCarouselItems;
-    return this.carouselItems;
+  initRewards() {
+    this.carouselItems = this._rewardService.getMockedCarouselRewards(this._userId);    
+    // this._rewardService.getCarouselRewards(this._userId)
+    // .subscribe(rewards => {
+    //   this.carouselItems = rewards;
+    // });
+
+    this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
+    this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
   }
 
   /**
@@ -64,6 +71,34 @@ export class CarouselComponent implements OnInit {
     this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
   }
 
+  ngAfterViewInit() {
+    this.scrollable.elementScrolled().subscribe(elem => {
+      const currentlyScrolledTo = this.scrolledToReward;
+      const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+      // if scrollTop of target is higher than previous it is a scroll down      
+      if(elem.target.scrollTop > this.currentScrollTop) {
+        const newReward = this.carouselItems[currentScrolledIndex + 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward
+      }
+      // else scroll up
+      else {
+        const newReward = this.carouselItems[currentScrolledIndex - 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward
+      }
+
+      console.log(this.scrolledToReward);
+      this.currentScrollTop = elem.target.scrollTop;
+    });
+      // .pipe(map(() => {
+      //   console.log('Checking');
+      //   if (this.scrollable.getElementRef().nativeElement.scrollTop > this.ELEVATION_BREAKPOINT) {
+      //     this.scrollable.getElementRef().nativeElement.children[0].classList.add(this.ELEVATION_CLASS);
+      //   } else {
+      //     this.scrollable.getElementRef().nativeElement.children[0].classList.remove(this.ELEVATION_CLASS);
+      //   }
+      // }))
+      // .subscribe();
+  }
   /**
    * As the user enters values into the reward search, filter the list
    * @param searchValue
