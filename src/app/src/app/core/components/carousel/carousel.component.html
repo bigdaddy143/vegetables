@@ -4,7 +4,7 @@
 <div class="carousel" #scrollingElement cdk-scrollable>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems">
-      <div (click)="updateSelectedReward(rewardItem)" class="carousel-item">
+      <div (click)="openDialog(rewardItem)" class="carousel-item">
         <div class="carousel-item-left">
         </div>
         <div class="carousel-item-right">

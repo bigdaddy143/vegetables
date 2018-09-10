@@ -5,15 +5,22 @@ import { RewardService } from '../../services/reward.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CourseDialogComponent } from './modals/course-dialog/course-dialog.component';
+
 
 @NgModule({
     declarations: [
-        CarouselComponent
+        CarouselComponent,
+        CourseDialogComponent
     ],
     imports: [
         CommonModule,
         HttpClientModule,
-        ScrollDispatchModule
+        ScrollDispatchModule,
+        MatDialogModule,
+        BrowserAnimationsModule
     ],
     exports: [
         CarouselComponent
@@ -21,6 +28,9 @@ import { ScrollDispatchModule } from '@angular/cdk/scrolling';
     providers: [
         UserService,
         RewardService,
+    ],
+    entryComponents: [
+        CourseDialogComponent
     ]
 })
 export class CarouselModule { }
