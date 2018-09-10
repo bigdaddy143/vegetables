@@ -2,12 +2,10 @@
   <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
 </div>
 <div class="carousel" #scrollingElement cdk-scrollable>
-<!-- <cdk-virtual-scroll-viewport class="list-container lg" [itemSize]="52.5"> -->
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
-    <div *ngFor="let rewardItem of carouselItems">
+    <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems">
       <div (click)="updateSelectedReward(rewardItem)" class="carousel-item">
         <div class="carousel-item-left">
-
         </div>
         <div class="carousel-item-right">
           <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
@@ -21,5 +19,4 @@
       </div>
     </div>
   </ng-container>
-<!-- </cdk-virtual-scroll-viewport> -->
 </div>

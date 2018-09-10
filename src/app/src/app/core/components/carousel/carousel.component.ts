@@ -72,7 +72,12 @@ export class CarouselComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    // i am trying to find the newly scrolled to item and add a new class to it
     this.scrollable.elementScrolled().subscribe(elem => {
+      // const test = this.scrollable.getElementRef().nativeElement.children;
+      this.scrollable.getElementRef().nativeElement.children[this.scrolledToReward.rewardId]
+        .classList.remove('item-scrolled-to');;
+      
       const currentlyScrolledTo = this.scrolledToReward;
       const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
       // if scrollTop of target is higher than previous it is a scroll down      
@@ -86,19 +91,13 @@ export class CarouselComponent implements OnInit {
         this.scrolledToReward = newReward ? newReward : this.scrolledToReward
       }
 
-      console.log(this.scrolledToReward);
+      this.scrollable.getElementRef().nativeElement.children[this.scrolledToReward.rewardId]
+        .classList.add('item-scrolled-to');;
+
       this.currentScrollTop = elem.target.scrollTop;
     });
-      // .pipe(map(() => {
-      //   console.log('Checking');
-      //   if (this.scrollable.getElementRef().nativeElement.scrollTop > this.ELEVATION_BREAKPOINT) {
-      //     this.scrollable.getElementRef().nativeElement.children[0].classList.add(this.ELEVATION_CLASS);
-      //   } else {
-      //     this.scrollable.getElementRef().nativeElement.children[0].classList.remove(this.ELEVATION_CLASS);
-      //   }
-      // }))
-      // .subscribe();
   }
+
   /**
    * As the user enters values into the reward search, filter the list
    * @param searchValue
