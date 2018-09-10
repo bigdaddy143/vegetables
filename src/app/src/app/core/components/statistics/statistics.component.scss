@@ -1,0 +1,18 @@
+@import '~styles.scss';
+
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    font-size: $small;
+    text-align: right;
+    padding-right: 15%;
+    
+    .statistics-header {
+        color: $lightGreen
+    }
+
+    .statistics-value {
+        color: white;
+        padding-bottom: .5em;
+    }
+}

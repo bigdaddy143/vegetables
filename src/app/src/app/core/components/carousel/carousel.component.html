@@ -4,9 +4,8 @@
 <div class="carousel">
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div *ngFor="let rewardItem of carouselItems">
-      <div (click)="updateSelectedReward(rewardItem)" class="carousel-item">
+      <div (click)="openDialog(rewardItem)" class="carousel-item">
         <div class="carousel-item-left">
-
         </div>
         <div class="carousel-item-right">
           <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
