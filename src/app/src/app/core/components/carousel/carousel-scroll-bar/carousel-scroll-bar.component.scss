@@ -1,0 +1,16 @@
+.scroll-line {
+  background: red;
+  display: inline-block;
+  height: 100%;
+  width: 2px;
+}
+
+.scroll-placement {
+  width: 30px;
+  height: 10px;
+  background: purple;
+  z-index: 1000;
+  position: absolute;
+  // top: 0;
+  bottom: 0;
+}

@@ -8,19 +8,22 @@ import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CourseDialogComponent } from './modals/course-dialog/course-dialog.component';
+import { CarouselScrollBarComponent } from "./carousel-scroll-bar/carousel-scroll-bar.component";
+import { ChangeDetectorRef } from "@angular/core";
 
 
 @NgModule({
     declarations: [
         CarouselComponent,
-        CourseDialogComponent
+        CourseDialogComponent,
+        CarouselScrollBarComponent,
     ],
     imports: [
         CommonModule,
         HttpClientModule,
         ScrollDispatchModule,
         MatDialogModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
     ],
     exports: [
         CarouselComponent

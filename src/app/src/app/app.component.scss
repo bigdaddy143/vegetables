@@ -11,29 +11,30 @@ $appBackgroundColor: #0B1E2E;
     background-color: $appBackgroundColor;
     
     .left-dashboard {
-        width: 35%;
+        width: 20%;
         height: 100%;
     }
     
-    .middle-dashboard {
-        width: 40%;
+    .middle-dashboard { 
+        width: 60%;
         height: 100%;
+        flex-direction: row;
+
+        .app-carousel {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
     }
 
     .right-dashboard {
         height: 100%;
         display: flex;
         flex-direction: column;
-        width: 25%;
+        width: 20%;
 
         .income-referral-container {
             height: 17.5%;
-        }
-        .statistics-total-container {
-            height: 17.5%;
-        }
-        .machine-total-container {
-            height: 17.5%
         }
     }
 }

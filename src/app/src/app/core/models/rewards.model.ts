@@ -1,4 +1,8 @@
 export class Reward {
+  constructor (id?: number) {
+    this.rewardId = id;
+  }
+
   rewardId: number;
   name: string;
   price: number;

@@ -37,7 +37,7 @@ export class RewardService {
     let i = 0;
     while (i < 10) {
       const mockReward = new Reward ();
-      mockReward.rewardId = i;
+      mockReward.rewardId = _.random(0, 10000);
       mockReward.price = (i + 1) * 3;
       mockReward.name = 'Reward ' + i.toString();
       mockReward.details = (i).toString() + ' is the power of love.';
@@ -46,6 +46,15 @@ export class RewardService {
       mockArray.push(mockReward);
       i++;
     }
+
+    const mockReward = new Reward ();
+    mockReward.rewardId = _.random(0, 10000);
+    mockReward.price = 100;
+    mockReward.name = 'Reward ' + 10
+    mockReward.details = (10).toString() + ' is the power of love.';
+    mockReward.imageLink = '../../assets/images/favicon';
+    mockReward.selected = false
+    mockArray.push(mockReward);
 
     return _.orderBy(this.mapPercentageHeight(mockArray), ['price'], ['desc']);
   }

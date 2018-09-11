@@ -19,12 +19,12 @@ import { StatisticsService } from './core/services/statistics.service';
     IncomeComponent,
     AnimationComponent,
     MachineComponent,
-    StatisticsComponent
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
     CarouselModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     MachineService,

@@ -7,6 +7,7 @@ import { Reward } from '../../models/rewards.model';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { CourseDialogComponent } from './modals/course-dialog/course-dialog.component';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
   selector: 'app-carousel',
@@ -27,42 +28,47 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   constructor(
     private _userService: UserService,
     private _rewardService: RewardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdRef:ChangeDetectorRef
   ) { }
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
   // @ViewChild('scrollingElement') scrollingElement: ElementRef<HTMLElement>;
+
+  ngAfterViewInit() {
+    // subscribe to on scroll event
+    this.scrollable.elementScrolled().subscribe(elem => {
+      this.handleScroll(elem);
+    });
+  }
+
+  handleScroll(elem): void {
+    // const children = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
+    
+    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+    .classList.remove('item-scrolled-to');;
+    
+    const currentlyScrolledTo = this.scrolledToReward;
+    const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+    // if scrollTop of target is higher than previous it is a scroll down
+    if (elem.target.scrollTop > this.currentScrollTop) {
+      const newReward = this.carouselItems[currentScrolledIndex + 1];
+      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+    } else {
+      // else scroll up
+      const newReward = this.carouselItems[currentScrolledIndex - 1];
+      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+    }
+
+    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      .classList.add('item-scrolled-to');
+    this.currentScrollTop = elem.target.scrollTop;
+    this.cdRef.detectChanges();
+  }
 
   ngOnInit() {
     this._userId = this._userService.getUserId();
     this.initRewards();
   }
-
-  ngAfterViewInit() {
-    // i am trying to find the newly scrolled to item and add a new class to it
-    this.scrollable.elementScrolled().subscribe(elem => {
-      // const test = this.scrollable.getElementRef().nativeElement.children;
-      this.scrollable.getElementRef().nativeElement.children[this.scrolledToReward.rewardId]
-        .classList.remove('item-scrolled-to');;
-
-      const currentlyScrolledTo = this.scrolledToReward;
-      const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
-      // if scrollTop of target is higher than previous it is a scroll down
-      if (elem.target.scrollTop > this.currentScrollTop) {
-        const newReward = this.carouselItems[currentScrolledIndex + 1];
-        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-      } else {
-        // else scroll up
-        const newReward = this.carouselItems[currentScrolledIndex - 1];
-        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-      }
-
-      this.scrollable.getElementRef().nativeElement.children[this.scrolledToReward.rewardId]
-        .classList.add('item-scrolled-to');
-
-      this.currentScrollTop = elem.target.scrollTop;
-    });
-  }
-
 
   initRewards() {
     this.carouselItems = this._rewardService.getMockedCarouselRewards(this._userId);
