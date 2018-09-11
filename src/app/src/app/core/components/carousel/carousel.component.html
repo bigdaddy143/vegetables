@@ -2,14 +2,10 @@
   <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
 </div> -->
 
-<ng-container>
-    {{scrolledToReward.rewardId}}
-</ng-container>
 <app-carousel-scroll-bar class="progress-container" 
 [percentagePlacement]="scrolledToReward.percentageHeight"
 [currentAmount]="currentAmount"
 >
-<!-- <app-carousel-scroll-bar class="progress-container"> -->
 </app-carousel-scroll-bar>
 <div class="carousel" #scrollingElement cdk-scrollable>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">

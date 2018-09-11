@@ -86,7 +86,7 @@ $rewardHeight: 75px;
 .progress-container {
   height: 60%;
   width: 5px;
-  background: #AEC556;
+  background: linear-gradient(to top, #AEC556 60%, transparent 0);
   text-align: center;
   position: relative;
 }
