@@ -13,13 +13,15 @@ $rewardHeight: 75px;
     height: 60%;
     width: 100%;
     overflow-y: scroll;
+    align-items: flex-end;
     
     .carousel-item {
         cursor: pointer;
         display: flex;
         flex-direction: row;
         height: $rewardHeight;
-        margin: .25em;
+        margin-top: .25em;
+        margin-bottom: .25em;        
         width: 100%;
         padding-bottom: .5em;
 

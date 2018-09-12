@@ -8,9 +8,10 @@
 .scroll-placement {
   width: 30px;
   height: 10px;
-  background: purple;
+  background: #D0E6C2;
   z-index: 1000;
   position: absolute;
-  // top: 0;
+  overflow: overlay;
+  right: -12px;
   bottom: 0;
 }

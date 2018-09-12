@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CourseDialogComponent } from './modals/course-dialog/course-dialog.component';
 import { CarouselScrollBarComponent } from "./carousel-scroll-bar/carousel-scroll-bar.component";
 import { ChangeDetectorRef } from "@angular/core";
-
+import { CarouselUtils } from "./utils/carouselUtils";
 
 @NgModule({
     declarations: [
@@ -31,6 +31,7 @@ import { ChangeDetectorRef } from "@angular/core";
     providers: [
         UserService,
         RewardService,
+        CarouselUtils
     ],
     entryComponents: [
         CourseDialogComponent

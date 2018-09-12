@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import { map } from 'rxjs/operators';
 import * as _ from "lodash";
+import { CarouselUtils } from "../components/carousel/utils/carouselUtils";
 
 @Injectable()
 export class RewardService {
@@ -60,12 +61,12 @@ export class RewardService {
   }
 
   mapPercentageHeight(rewards: Reward[]): Reward[] {
-    const maxRewardPrice = _.maxBy(rewards, 'price').price;
+    const maxRewardPrice = this.getHighestRewardPrice(rewards);
     const selectedReward = this.getSelectedReward(rewards);
 
     return selectedReward ? rewards.map(reward => ({
       ...reward, 
-      percentageHeight: this.calculatePlacementPercentage(reward.price, selectedReward.price, maxRewardPrice)
+      percentageHeight: CarouselUtils.calculateYAxisOffset(reward.price, selectedReward.price, maxRewardPrice)
     })) : rewards;
   }
 
@@ -73,27 +74,8 @@ export class RewardService {
     return rewards.find(r => r.selected);
   }
 
-  /**
-   * This function returns a percentage height for the rewward item. 
-   * 0 means it's all the way at the bottom, 1 means it is at the top, .5 means it
-   * is in the middle, etc
-   * @param rewardItemPrice reward item to calculate the percentage for
-   * @param selectedRewardAmount the price of the selected reward
-   * @param maxRewardAmount the price of the reward with the highest price
-   */
   calculatePlacementPercentage(rewardItemPrice: number, selectedRewardAmount: number, maxRewardAmount: number): number {
-    if(rewardItemPrice < selectedRewardAmount) {
-      const poo= _.round((rewardItemPrice / selectedRewardAmount) * .5, 4);
-      return poo;
-    }
-    else if(rewardItemPrice > selectedRewardAmount) {
-      const upperDiff = maxRewardAmount - selectedRewardAmount; // pull out
-      const itemDiff = rewardItemPrice - selectedRewardAmount;
-      const percentRatio = itemDiff / upperDiff;
-      return (percentRatio * .5) + .5;
-    }
-    //else the item is the selected item
-    return .5;
+    return CarouselUtils.calculateYAxisOffset(rewardItemPrice, selectedRewardAmount, maxRewardAmount);
   }
 
   /**
@@ -104,6 +86,14 @@ export class RewardService {
    */
   getMiddlePricedReward(rewards: Reward[], selectedReward?: Reward): Reward {
     return selectedReward ? selectedReward : rewards[_.ceil(rewards.length / 2)];
+  }
+
+/**
+ * Returns the highest reward price
+ * @param rewards 
+ */
+  getHighestRewardPrice(rewards: Reward[]) {
+    return _.maxBy(rewards, 'price').price;
   }
 
   /**
