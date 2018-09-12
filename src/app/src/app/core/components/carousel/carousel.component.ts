@@ -51,15 +51,15 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     //TODO: Remove this after its hooked up
     this.scrollCounter = 0;
     this.scrollSpeed = 3;
-    this.currentAmount = 50;
+    this.currentAmount = 1000;
   }
 
   handleScroll(elem): void {
     if(this.scrollCounter === this.scrollSpeed) {
       //set scroll counter back to 0
       this.scrollCounter = 0;
-      this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-      .classList.remove('item-scrolled-to');
+      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      // .classList.remove('item-scrolled-to');
   
       const currentlyScrolledTo = this.scrolledToReward;
       const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
@@ -73,31 +73,11 @@ export class CarouselComponent implements OnInit, AfterViewInit {
         this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
       }
 
-      this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-        .classList.add('item-scrolled-to');
+      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      //   .classList.add('item-scrolled-to');
 
-
-        /*********zachs stuff */
-    // scroll logic
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
-
-    // If container does not Exist then return
-    const container = this.scrollable.getElementRef().nativeElement;
-    if (container == null) {
-      console.log('big dicks');
-      return;
-    }
-
-    // Position container at the top line then scroll el into view
-    container.scrollTop = 0;
-    el.scrollIntoView(true);
-
-    // Scroll back nothing if element is at bottom of container else do it
-    // for half the height of the containers display area
-    const scrollBack = (container.scrollHeight - container.scrollTop <= container.clientHeight) ? 0 : container.clientHeight / 2;
-    container.scrollTop = container.scrollTop - scrollBack;
-
-    /******** Zachs stuff */
+    el.scrollIntoView({behavior: "instant", block: "center", inline: "nearest"});
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
     } else{

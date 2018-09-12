@@ -18,9 +18,6 @@ export class CarouselScrollBarComponent implements OnInit {
   @ViewChild("ScrollPlacement") scrollPlacement;
   @ViewChild("ScrollLine") scrollLine;
 
-  // @Input() currentSelectedRewardAmount: number;
-  // @Input() highestRewardAmount: number;
-  // @Input() currentAmount: number
   @Input() percentagePlacement: any
 
   constructor() { }
@@ -35,13 +32,6 @@ export class CarouselScrollBarComponent implements OnInit {
       const newTopMargin = changes.percentagePlacement.currentValue * height;
       this.scrollPlacement.nativeElement.style.bottom = newTopMargin + 'px';
     }
-    // if(changes.currentAmount) {
-    //   const percentage = CarouselUtils.calculateYAxisOffset(changes.currentAmount.currentValue, 
-    //     this.currentSelectedRewardAmount, 
-    //     this.highestRewardAmount);
-
-    //     this.ScrollPlacement
-    // }
   }
 
 }
