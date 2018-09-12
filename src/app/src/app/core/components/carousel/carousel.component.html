@@ -22,7 +22,6 @@
               <span class="reward-name">{{rewardItem.name}}</span>
               <span class="reward-price">{{rewardItem.price | currency:'USD'}}</span>
             </div>
-            <span class="time-remaining">percentageHeight: {{rewardItem.percentageHeight}}</span>
             <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
           </div>
         </div>
