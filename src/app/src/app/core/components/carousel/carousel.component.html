@@ -1,33 +1,32 @@
 <!-- <div class="reward-search">
   <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
 </div> -->
+<div #Scrollbar class="progress-container">
+  <app-carousel-scroll-bar [percentagePlacement]="scrolledToReward.percentageHeight">
+  </app-carousel-scroll-bar>
+</div>
 
-<app-carousel-scroll-bar class="progress-container" 
-[percentagePlacement]="scrolledToReward.percentageHeight"
->
-</app-carousel-scroll-bar>
-<div class="carousel" #scrollingElement cdk-scrollable>
+<div class="carousel" #ScrollingElement cdk-scrollable>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems; let i=index">
-      <div (click)="openDialog(rewardItem)" class="carousel-item" 
-      [ngClass]="{
-                  'zero-magnitude': getClass(currentScrolledIndex,i)==='zero' ,
-                  'one-magnitude': getClass(currentScrolledIndex,i)==='one', 
-                  'two-magnitudes': getClass(currentScrolledIndex,i)==='two',
-                  'three-magnitudes': getClass(currentScrolledIndex,i)==='three' 
-                }">
-        <div class="carousel-item-left">
-        </div>
-        <div class="carousel-item-right">
-          <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
-          <div class="reward-name-price">
-            <span class="reward-name">{{rewardItem.name}}</span>
-            <span class="reward-price">{{rewardItem.price | currency:'USD'}}</span>
+      <div (click)="openDialog(rewardItem)" class="carousel-item">
+        <div [ngClass]="{ 'zero-magnitude': getClass(currentScrolledIndex,i)==='zero' , 'one-magnitude': getClass(currentScrolledIndex,i)==='one',
+        'two-magnitudes': getClass(currentScrolledIndex,i)==='two', 'three-magnitudes': getClass(currentScrolledIndex,i)==='three'
+        }">
+
+          <div class="carousel-item-left">
           </div>
-          <span class="time-remaining">percentageHeight: {{rewardItem.percentageHeight}}</span>
-          <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
+          <div class="carousel-item-right">
+            <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
+            <div class="reward-name-price">
+              <span class="reward-name">{{rewardItem.name}}</span>
+              <span class="reward-price">{{rewardItem.price | currency:'USD'}}</span>
+            </div>
+            <span class="time-remaining">percentageHeight: {{rewardItem.percentageHeight}}</span>
+            <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
+          </div>
         </div>
       </div>
     </div>
   </ng-container>
-</div>  
+</div>

@@ -19,7 +19,7 @@ import { Input } from "@angular/core";
 export class CarouselComponent implements OnInit, AfterViewInit {
   // private variable declarations
   private _userId: number;
-private currentScrollTop: number;
+  private currentScrollTop: number;
 
 
   // public variable declarations
@@ -29,6 +29,8 @@ private currentScrollTop: number;
   public originalCarouselItems: Reward[];
   public highestRewardPrice: number;
   public currentScrolledIndex: number;
+  private scrollSpeed: number;
+  private scrollCounter: number;
 
   constructor(
     private _userService: UserService,
@@ -37,7 +39,8 @@ private currentScrollTop: number;
     private cdRef: ChangeDetectorRef
   ) { }
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
-  @ViewChild('scrollingElement') scrollingElement: any;
+  @ViewChild('ScrollingElement') scrollingElement: any;
+  @ViewChild('Scrollbar') scrollbar: any
 
   @Input() currentAmount: number;
 
@@ -46,51 +49,47 @@ private currentScrollTop: number;
     this.scrollable.elementScrolled().subscribe(elem => {
       this.handleScroll(elem);
     });
+
+    //TODO: Remove this after its hooked up
+    this.scrollCounter = 0;
+    this.scrollSpeed = 4;
+    this.currentAmount = 1000;
   }
 
   handleScroll(elem): void {
-    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-    .classList.remove('item-scrolled-to');
 
-    const currentlyScrolledTo = this.scrolledToReward;
-    this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+    if (this.scrollCounter === this.scrollSpeed) {
 
-    // if scrollTop of target is higher than previous it is a scroll down
-    if (elem.target.scrollTop > this.currentScrollTop) {
-      const newReward = this.carouselItems[this.currentScrolledIndex + 1];
-      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-    } else {
-      // else scroll up
-      const newReward = this.carouselItems[this.currentScrolledIndex - 1];
-      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-    }
+      //set scroll counter back to 0
+      this.scrollCounter = 0;
+      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      // .classList.remove('item-scrolled-to');
 
-    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-      .classList.add('item-scrolled-to');
+      const currentlyScrolledTo = this.scrolledToReward;
+      this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+      // if scrollTop of target is higher than previous it is a scroll down
+      if (elem.target.scrollTop > this.currentScrollTop) {
+        const newReward = this.carouselItems[this.currentScrolledIndex + 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+      } else {
+        // else scroll up
+        const newReward = this.carouselItems[this.currentScrolledIndex - 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+      }
 
-    // scroll logic
+      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      //   .classList.add('item-scrolled-to');
+
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
 
-    // If container does not Exist then return
-    const container = this.scrollable.getElementRef().nativeElement;
-    if (container == null) {
-      console.log('big dicks');
-      return;
-    }
-
-    // Position container at the top line then scroll el into view
-    container.scrollTop = 0;
-
-    el.scrollIntoView(true);
-
-    // Scroll back nothing if element is at bottom of container else do it
-    // for half the height of the containers display area
-    const scrollBack = (container.scrollHeight - container.scrollTop <= container.clientHeight) ? 0 : container.clientHeight / 2;
-    container.scrollTop = container.scrollTop - scrollBack;
-
+    el.scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});
 
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
+    } else {
+      // increment counter
+      this.scrollCounter ++;
+    }
   }
 
   ngOnInit() {
@@ -107,6 +106,7 @@ private currentScrollTop: number;
     this.highestRewardPrice = this._rewardService.getHighestRewardPrice(this.carouselItems);
     this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
     this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
+    this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === this.scrolledToReward.rewardId);
   }
 
   /**
@@ -126,6 +126,10 @@ private currentScrollTop: number;
     const percentage = CarouselUtils.calculateYAxisOffset(this.currentAmount,
       this.selectedReward.price,
       this.highestRewardPrice);
+
+    const newGradient = 'linear-gradient(to top, #AEC556 '+percentage * 100+'%, transparent 0)';
+
+    this.scrollbar.nativeElement.style.background = newGradient;
   }
 
   /**
@@ -144,10 +148,12 @@ private currentScrollTop: number;
       } else {
         // updating the value on the reward passed in
         rewardItem.selected = true;
+        this.selectedReward = rewardItem;
       }
-      //updates the fill amount of the scroll bar to indicate the amount
-      this.updateProgressAmount();
     });
+
+    //updates the fill amount of the scroll bar to indicate the amount
+    this.updateProgressAmount();
 
     // set new percentage height of rewards
     this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
@@ -168,11 +174,8 @@ private currentScrollTop: number;
     }
   }
 
-
   openDialog(reward: Reward) {
-
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.position = {
@@ -197,9 +200,6 @@ private currentScrollTop: number;
   }
   getClass(currentPosition: number, index: number): string {
     const distance = Math.abs(index - currentPosition);
-    console.log('Pos: ' + currentPosition);
-    console.log('Index: ' + index);
-    console.log(distance);
     switch (distance) {
       case(0): {
         return 'zero';

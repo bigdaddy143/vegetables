@@ -1,6 +1,6 @@
 // 1024x768 is the most common screen resolution size recognized
-$height: 768px;
-$width: 1024px;
+$height: 500px;
+$width: 900px;
 $appBackgroundColor: #0B1E2E;
 
 .dashboard {
@@ -16,7 +16,7 @@ $appBackgroundColor: #0B1E2E;
     }
     
     .middle-dashboard { 
-        width: 60%;
+        width: 50%;
         height: 100%;
         flex-direction: row;
 
@@ -31,10 +31,18 @@ $appBackgroundColor: #0B1E2E;
         height: 100%;
         display: flex;
         flex-direction: column;
-        width: 20%;
+        width: 30%;
 
         .income-referral-container {
-            height: 17.5%;
+            height: 30%;
+        }
+
+        .machine-total-container {
+            height: 20%;
+        }
+
+        .statistics-total-container {
+            height: 25%;
         }
     }
 }
