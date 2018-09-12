@@ -26,6 +26,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   public scrolledToReward: Reward;
   public originalCarouselItems: Reward[];
   public highestRewardPrice: number;
+  private scrollSpeed: number;
+  private scrollCounter: number;
   private currentScrollTop: number;
 
   constructor(
@@ -35,7 +37,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     private cdRef: ChangeDetectorRef
   ) { }
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
-  @ViewChild('scrollingElement') scrollingElement: any;
+  @ViewChild('ScrollingElement') scrollingElement: any;
+  @ViewChild('Scrollbar') scrollbar: any
 
   @Input() currentAmount: number;
   
@@ -44,27 +47,37 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     this.scrollable.elementScrolled().subscribe(elem => {
       this.handleScroll(elem);
     });
+
+    //TODO: Remove this after its hooked up
+    this.scrollCounter = 0;
+    this.scrollSpeed = 3;
+    this.currentAmount = 50;
   }
 
   handleScroll(elem): void {
-    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-    .classList.remove('item-scrolled-to');
+    if(this.scrollCounter === this.scrollSpeed) {
+      //set scroll counter back to 0
+      this.scrollCounter = 0;
+      this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+      .classList.remove('item-scrolled-to');
+  
+      const currentlyScrolledTo = this.scrolledToReward;
+      const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+      // if scrollTop of target is higher than previous it is a scroll down
+      if (elem.target.scrollTop > this.currentScrollTop) {
+        const newReward = this.carouselItems[currentScrolledIndex + 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+      } else {
+        // else scroll up
+        const newReward = this.carouselItems[currentScrolledIndex - 1];
+        this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+      }
 
-    const currentlyScrolledTo = this.scrolledToReward;
-    const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
-    // if scrollTop of target is higher than previous it is a scroll down
-    if (elem.target.scrollTop > this.currentScrollTop) {
-      const newReward = this.carouselItems[currentScrolledIndex + 1];
-      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-    } else {
-      // else scroll up
-      const newReward = this.carouselItems[currentScrolledIndex - 1];
-      this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-    }
+      this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
+        .classList.add('item-scrolled-to');
 
-    this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-      .classList.add('item-scrolled-to');
 
+        /*********zachs stuff */
     // scroll logic
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
 
@@ -84,9 +97,13 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     const scrollBack = (container.scrollHeight - container.scrollTop <= container.clientHeight) ? 0 : container.clientHeight / 2;
     container.scrollTop = container.scrollTop - scrollBack;
 
-
+    /******** Zachs stuff */
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
+    } else{
+      //increment counter
+      this.scrollCounter ++;
+    }
   }
 
   ngOnInit() {
@@ -123,7 +140,9 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.selectedReward.price,
       this.highestRewardPrice);
 
-    
+    const newGradient = 'linear-gradient(to top, #AEC556 '+percentage * 100+'%, transparent 0)';
+      
+    this.scrollbar.nativeElement.style.background = newGradient;
   }
 
   /**
@@ -142,10 +161,12 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       } else {
         // updating the value on the reward passed in
         rewardItem.selected = true;
+        this.selectedReward = rewardItem;
       }
-      //updates the fill amount of the scroll bar to indicate the amount
-      this.updateProgressAmount();
     });
+
+    //updates the fill amount of the scroll bar to indicate the amount
+    this.updateProgressAmount();
 
     // set new percentage height of rewards
     this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
@@ -166,11 +187,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   openDialog(reward: Reward) {
-
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.position = {

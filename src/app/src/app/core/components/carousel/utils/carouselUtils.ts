@@ -14,13 +14,13 @@ export class CarouselUtils {
    */
   static calculateYAxisOffset(priceToCalculate: number, selectedRewardAmount: number, maxRewardAmount: number): number {
     if(priceToCalculate < selectedRewardAmount) {
-      return  _.round((priceToCalculate / selectedRewardAmount) * .5, 4);
+      return  _.round((priceToCalculate / selectedRewardAmount) * .5, 2);
     }
     else if(priceToCalculate > selectedRewardAmount) {
       const upperDiff = maxRewardAmount - selectedRewardAmount; // pull out
       const itemDiff = priceToCalculate - selectedRewardAmount;
       const percentRatio = itemDiff / upperDiff;
-      return (percentRatio * .5) + .5;
+      return _.round((percentRatio * .5) + .5, 2);
     }
     //else the item is the selected item
     return .5;

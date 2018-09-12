@@ -1,12 +1,12 @@
 <!-- <div class="reward-search">
   <input type="text" #rewardSearch (keyup)="onRewardsSearch($event)" placeholder="SEARCH REWARDS">
 </div> -->
+<div #Scrollbar class="progress-container">
+  <app-carousel-scroll-bar [percentagePlacement]="scrolledToReward.percentageHeight">
+  </app-carousel-scroll-bar>
+</div>
 
-<app-carousel-scroll-bar class="progress-container" 
-[percentagePlacement]="scrolledToReward.percentageHeight"
->
-</app-carousel-scroll-bar>
-<div class="carousel" #scrollingElement cdk-scrollable>
+<div class="carousel" #ScrollingElement cdk-scrollable>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems">
       <div (click)="openDialog(rewardItem)" class="carousel-item">
