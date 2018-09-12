@@ -19,6 +19,8 @@ import { Input } from "@angular/core";
 export class CarouselComponent implements OnInit, AfterViewInit {
   // private variable declarations
   private _userId: number;
+private currentScrollTop: number;
+
 
   // public variable declarations
   public carouselItems: Reward[];
@@ -26,7 +28,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   public scrolledToReward: Reward;
   public originalCarouselItems: Reward[];
   public highestRewardPrice: number;
-  private currentScrollTop: number;
+  public currentScrolledIndex: number;
 
   constructor(
     private _userService: UserService,
@@ -38,7 +40,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollingElement') scrollingElement: any;
 
   @Input() currentAmount: number;
-  
+
   ngAfterViewInit() {
     // subscribe to on scroll event
     this.scrollable.elementScrolled().subscribe(elem => {
@@ -51,14 +53,15 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     .classList.remove('item-scrolled-to');
 
     const currentlyScrolledTo = this.scrolledToReward;
-    const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+    this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+
     // if scrollTop of target is higher than previous it is a scroll down
     if (elem.target.scrollTop > this.currentScrollTop) {
-      const newReward = this.carouselItems[currentScrolledIndex + 1];
+      const newReward = this.carouselItems[this.currentScrolledIndex + 1];
       this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
     } else {
       // else scroll up
-      const newReward = this.carouselItems[currentScrolledIndex - 1];
+      const newReward = this.carouselItems[this.currentScrolledIndex - 1];
       this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
     }
 
@@ -77,6 +80,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
     // Position container at the top line then scroll el into view
     container.scrollTop = 0;
+
     el.scrollIntoView(true);
 
     // Scroll back nothing if element is at bottom of container else do it
@@ -122,8 +126,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     const percentage = CarouselUtils.calculateYAxisOffset(this.currentAmount,
       this.selectedReward.price,
       this.highestRewardPrice);
-
-    
   }
 
   /**
@@ -193,4 +195,25 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     }
     );
   }
+  getClass(currentPosition: number, index: number): string {
+    const distance = Math.abs(index - currentPosition);
+    console.log('Pos: ' + currentPosition);
+    console.log('Index: ' + index);
+    console.log(distance);
+    switch (distance) {
+      case(0): {
+        return 'zero';
+      }
+      case(1): {
+        return 'one';
+      }
+      case(2): {
+        return 'two';
+      }
+      default: {
+        return 'three';
+      }
+    }
+  }
 }
+

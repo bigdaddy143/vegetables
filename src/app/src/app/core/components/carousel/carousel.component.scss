@@ -22,8 +22,20 @@ $rewardHeight: 75px;
         height: $rewardHeight;
         margin-top: .25em;
         margin-bottom: .25em;        
-        width: 100%;
         padding-bottom: .5em;
+        
+        .zero-magnitude {
+            width: 100%;
+        }
+        .one-magnitude {
+            width: 95%;
+        }
+        .two-magnitudes {
+            width: 90%
+        }
+        .three-magnitudes {
+            width: 80%
+        }
 
         .carousel-item-left {
             width: 40px;
