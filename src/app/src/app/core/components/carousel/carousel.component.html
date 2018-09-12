@@ -5,7 +5,16 @@
   <app-carousel-scroll-bar [percentagePlacement]="scrolledToReward.percentageHeight">
   </app-carousel-scroll-bar>
 </div>
-
+<div class="current-amount-container">
+  <div class="top-container">
+    <span>Spinning Salad for</span>
+    <span>{{selectedReward.name}}</span>
+    <span>at x/x</span>
+  </div>
+  <div class="bottom-container">
+    {{percentToSelectedReward}}
+  </div>
+</div>
 <div class="carousel" #ScrollingElement cdk-scrollable>
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems; let i=index">

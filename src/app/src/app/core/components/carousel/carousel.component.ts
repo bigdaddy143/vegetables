@@ -19,8 +19,6 @@ import { Input } from "@angular/core";
 export class CarouselComponent implements OnInit, AfterViewInit {
   // private variable declarations
   private _userId: number;
-  private currentScrollTop: number;
-
 
   // public variable declarations
   public carouselItems: Reward[];
@@ -31,6 +29,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   public currentScrolledIndex: number;
   private scrollSpeed: number;
   private scrollCounter: number;
+  private currentScrollTop: number;
+  private percentToAchievement: number;
 
   constructor(
     private _userService: UserService,
@@ -81,9 +81,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       //   .classList.add('item-scrolled-to');
 
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
-
-    el.scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});
-
+    el.scrollIntoView({behavior: "auto", block: "center", inline: "nearest"});
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
     } else {
@@ -93,6 +91,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    //TODO: Remove this after its hooked up
+    this.scrollCounter = 0;
+    this.scrollSpeed = 3;
+    this.currentAmount = 1000;
     this._userId = this._userService.getUserId();
     this.initRewards();
   }
@@ -107,6 +109,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
     this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
     this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === this.scrolledToReward.rewardId);
+    this.updateProgressAmount();
+    this.setPercentToAchievement();
   }
 
   /**
@@ -120,6 +124,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.originalCarouselItems = this.carouselItems;
     });
     return this.carouselItems;
+  }
+
+  setPercentToAchievement() {
+    this.percentToAchievement = _.round(this.currentAmount / this.selectedReward.price);
   }
 
   updateProgressAmount() {

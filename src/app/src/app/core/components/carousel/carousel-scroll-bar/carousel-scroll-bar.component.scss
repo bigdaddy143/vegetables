@@ -7,11 +7,14 @@
 
 .scroll-placement {
   width: 30px;
-  height: 10px;
+  height: 25px;
   background: #D0E6C2;
   z-index: 1000;
   position: absolute;
   overflow: overlay;
-  right: -12px;
+  right: -13px;
   bottom: 0;
+
+  -webkit-clip-path: polygon(0 0, 100% 79%, 100% 100%, 0 23%);
+  clip-path: polygon(0 0, 100% 79%, 100% 100%, 0 23%);
 }
