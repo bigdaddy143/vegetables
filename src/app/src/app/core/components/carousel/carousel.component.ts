@@ -32,7 +32,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     private _userService: UserService,
     private _rewardService: RewardService,
     private dialog: MatDialog,
-    private cdRef:ChangeDetectorRef
+    private cdRef: ChangeDetectorRef
   ) { }
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
   @ViewChild('scrollingElement') scrollingElement: any;
@@ -49,7 +49,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   handleScroll(elem): void {
     this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
     .classList.remove('item-scrolled-to');
-    
+
     const currentlyScrolledTo = this.scrolledToReward;
     const currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
     // if scrollTop of target is higher than previous it is a scroll down
@@ -64,6 +64,26 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
     this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
       .classList.add('item-scrolled-to');
+
+    // scroll logic
+    const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
+
+    // If container does not Exist then return
+    const container = this.scrollable.getElementRef().nativeElement;
+    if (container == null) {
+      console.log('big dicks');
+      return;
+    }
+
+    // Position container at the top line then scroll el into view
+    container.scrollTop = 0;
+    el.scrollIntoView(true);
+
+    // Scroll back nothing if element is at bottom of container else do it
+    // for half the height of the containers display area
+    const scrollBack = (container.scrollHeight - container.scrollTop <= container.clientHeight) ? 0 : container.clientHeight / 2;
+    container.scrollTop = container.scrollTop - scrollBack;
+
 
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
