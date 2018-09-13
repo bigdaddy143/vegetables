@@ -11,7 +11,9 @@
         cursor: pointer;
 
         .my-machines {
+            font-family: 'sharpGroteskBook25';
             font-size: $small;
+            letter-spacing: 1.3px;
             color: white;
             font-weight: $normal;
             padding-left: .5em;
@@ -30,6 +32,7 @@
         padding: .25em;
 
         .machine-name {
+            font-family: 'sharpGroteskBook25';
             font-size: $medium;
             font-weight: $bold;
             color: $lightGreen;

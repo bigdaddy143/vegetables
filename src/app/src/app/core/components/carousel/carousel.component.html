@@ -24,7 +24,11 @@
           </div>
           <div class="carousel-item-right" [ngClass]="{'selected-reward': rewardItem.selected}">
             <div class="reward-time-name">
-              <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
+              <span *ngIf="rewardItem.price > currentAmount" class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
+              <span *ngIf="rewardItem.price <= currentAmount" class="time-remaining">
+                Redeem
+              </span>
+              
               <span class="reward-name">{{rewardItem.name}}</span>
             </div>
             <div class="reward-price">

@@ -8,10 +8,14 @@
     padding-right: 15%;
     
     .statistics-header {
-        color: $lightGreen
+        font-family:'sharpGroteskBook25';
+        font-size: $small;
+        color: $lightGreen;
+        letter-spacing: 1.3px;
     }
 
     .statistics-value {
+      font-family: 'sharpGroteskBook25';
         color: white;
         padding-bottom: .5em;
     }
