@@ -49,3 +49,7 @@ $veryBold: 900;
   font-family: 'sharpGroteskMedium25';
   src: url('assets/fonts/SharpGroteskMedium25.otf');
 }
+
+.reward-panel .mat-dialog-container {
+    background-color: $greenBackgroundColor;
+}

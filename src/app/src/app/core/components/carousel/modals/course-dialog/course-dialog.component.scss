@@ -1,0 +1,28 @@
+@import '~styles.scss';
+
+.reward-panel {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+
+    .reward-name {
+        font-size: $largefont;
+        font-weight: $semiBold;
+        font-family: 'SharpGroteskLight09';
+        color: $lightGreen;
+        align-content: center;
+
+    }
+    .button-panel{
+        display: flex;
+        flex-direction: row;
+
+        .select-reward {
+            padding:20px;
+        }
+
+        .close-reward {
+            padding:20px;
+        }
+    }
+}

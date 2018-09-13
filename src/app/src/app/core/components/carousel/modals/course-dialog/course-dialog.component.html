@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Reward Focus View</h2>
+<!-- <h2 mat-dialog-title>Reward Focus View</h2>
 
 <mat-dialog-content>
 <span>{{data.reward.name}}</span>
@@ -7,4 +7,13 @@
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Close</button>
   <button *ngIf="!data.selected" class="mat-raised-button mat-primary" (click)="selectReward()">Select Reward</button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->
+
+<div class="reward-panel">
+  <span class="reward-name">{{data.reward.name}}</span>
+  <div class="button-panel">
+    <button class="close-reward"(click)="close()">Close</button>
+    <button class="select-reward" *ngIf="!data.selected" (click)="selectReward()">Select Reward</button>
+  </div> 
+</div>
+
