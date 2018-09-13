@@ -22,13 +22,12 @@
         <div [ngClass]="getClass(currentScrolledIndex,i)">              
           <div class="carousel-item-left">
           </div>
-          <div class="carousel-item-right">
+          <div class="carousel-item-right" [ngClass]="{'selected-reward': rewardItem.selected}">
             <div class="reward-time-name">
               <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
               <span class="reward-name">{{rewardItem.name}}</span>
             </div>
             <div class="reward-price">
-              <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
               <span>{{rewardItem.price | currency:'USD'}}</span>
             </div>
           </div>
