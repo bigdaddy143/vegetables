@@ -16,7 +16,7 @@ $appBackgroundColor: #0B1E2E;
     }
     
     .middle-dashboard { 
-        width: 50%;
+        width: 55%;
         height: 100%;
         flex-direction: row;
 
@@ -32,10 +32,10 @@ $appBackgroundColor: #0B1E2E;
         height: 100%;
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 25%;
 
         .income-referral-container {
-            height: 30%;
+            height: 20%;
         }
 
         .machine-total-container {

@@ -28,9 +28,9 @@
               <span class="reward-name">{{rewardItem.name}}</span>
             </div>
             <div class="reward-price">
+              <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
               <span>{{rewardItem.price | currency:'USD'}}</span>
             </div>
-            <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
           </div>
         </div>
       </div>

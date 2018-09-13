@@ -19,7 +19,6 @@ $rewardWidth: 360px;
     height: 60%;
     width: 100%;
     overflow-y: scroll;
-    justify-content: center;
     align-items: center;
     
     .carousel-item {
@@ -32,101 +31,118 @@ $rewardWidth: 360px;
 
         .zero-magnitude {
             height: $rewardHeight;
-            width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right{
                 width: $rewardWidth;
+
+                 .reward-price {
+                    padding-top: $rewardHeight*0.75;
+                }
             }
             
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight $rewardHeight;
+                border-width: 0 0 $rewardHeight $rewardHeight * 0.9;
                 width: 35px;
             }
         }
 
         .one-magnitude {
             height: $rewardHeight * .95;
-            width: 100%;
             display: flex;
             flex-direction: row;    
 
             .carousel-item-right {
                 width: $rewardWidth * .90;
+
+                 .reward-price {
+                    padding-top: ($rewardHeight*0.95)*0.75;
+                }
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight * 0.95 $rewardHeight * 0.95;
+                border-width: 0 0 $rewardHeight * 0.95 $rewardHeight * 0.85;
                 width: 31px;
             }
         }
 
         .two-magnitudes {
             height: $rewardHeight * .90;
-            width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right {
                 width: $rewardWidth * .80;
+
+                 .reward-price {
+                    padding-top: ($rewardHeight*0.90)*0.75;
+                }
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight*0.90 $rewardHeight * 0.90;
+                border-width: 0 0 $rewardHeight*0.90 $rewardHeight * 0.75;
                 width: 27px;
             }
         }
 
         .three-magnitudes {
             height: $rewardHeight * .85;
-            width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right {
                 width: $rewardWidth * 0.70;
+
+                .reward-price {
+                    padding-top: ($rewardHeight*0.85)*0.75;
+                }
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight*0.85 $rewardHeight*0.85;
+                border-width: 0 0 $rewardHeight*0.85 $rewardHeight*0.65;
                 width: 23px;
             }
         }
         
         .four-magnitudes {
             height: $rewardHeight * .80;
-            width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right {
                 width: $rewardWidth * 0.60;
+
+                .reward-price {
+                    padding-top: ($rewardHeight*0.80)*0.75;
+                }
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight*0.80 $rewardHeight*0.80;
+                border-width: 0 0 $rewardHeight*0.80 $rewardHeight*0.55;
                 width: 19px;
             }
         }
 
         .five-magnitudes {
             height: $rewardHeight * .75;
-            width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right {
                 width: $rewardWidth * 0.50;
+                
+                .reward-price {
+                    padding-top: ($rewardHeight*0.75)*0.75;
+                }
+
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight*0.75 $rewardHeight*0.75;
+                border-width: 0 0 $rewardHeight*0.75 $rewardHeight*0.45;
                 width: 15px;
             }
         }
-
-
 
         .carousel-item-left {
             height: 0;
@@ -167,12 +183,11 @@ $rewardWidth: 360px;
                 font-weight: $normal;
                 color: $darkBlue;
                 text-align: right;
-                width: 30%;
+                width: 28%;
                 
                 .reward-price span {
                     color: $darkBlue;
                     text-align: right;
-                    align-self: flex-end;
                 }
             }
         }
