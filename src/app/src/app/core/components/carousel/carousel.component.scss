@@ -166,20 +166,17 @@ $rewardWidth: 360px;
 
 
         .selected-reward {
-            border: 4px solid $lightGreen !important;
+            border: 2px solid $lightGreen !important;
         }  
 
         .carousel-item-right {
             display: flex;
-            border: 4px solid $greenBackgroundColor;
-
             flex-direction: row;
             background-color: $greenBackgroundColor;
             width: 100%;
 
-          
-
             .reward-time-name {
+                padding-top: 4px;
                 display: flex;
                 flex-direction: column;
                 width: 70%;
