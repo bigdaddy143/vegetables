@@ -47,7 +47,7 @@ export class RewardService {
       mockArray.push(mockReward);
       i++;
     }
-
+    const dd = _.orderBy(this.mapPercentageHeight(mockArray), ['price'], ['desc']);;
     return _.orderBy(this.mapPercentageHeight(mockArray), ['price'], ['desc']);
   }
 

@@ -19,6 +19,10 @@ import { Input } from "@angular/core";
 export class CarouselComponent implements OnInit, AfterViewInit {
   // private variable declarations
   private _userId: number;
+  private scrollSpeed: number;
+  private scrollCounter: number;
+  private currentScrollTop: number;
+  private percentToAchievement: number;
 
   // public variable declarations
   public carouselItems: Reward[];
@@ -27,10 +31,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   public originalCarouselItems: Reward[];
   public highestRewardPrice: number;
   public currentScrolledIndex: number;
-  private scrollSpeed: number;
-  private scrollCounter: number;
-  private currentScrollTop: number;
-  private percentToAchievement: number;
 
   constructor(
     private _userService: UserService,
@@ -54,6 +54,12 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     this.scrollCounter = 0;
     this.scrollSpeed = 4;
     this.currentAmount = 1000;
+
+    const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
+    const pp = this.scrollable.getElementRef().nativeElement;
+    el.scrollIntoView({behavior: "instant", block: "center", inline: "nearest"});
+    // this.currentScrollTop = elem.target.scrollTop;
+    this.cdRef.detectChanges();
   }
 
   handleScroll(elem): void {
