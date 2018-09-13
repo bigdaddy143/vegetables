@@ -23,10 +23,12 @@
           <div class="carousel-item-left">
           </div>
           <div class="carousel-item-right">
-            <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
-            <div class="reward-name-price">
+            <div class="reward-time-name">
+              <span class="time-remaining">{{rewardItem.remainingTime}} Hours Remaining</span>
               <span class="reward-name">{{rewardItem.name}}</span>
-              <span class="reward-price">{{rewardItem.price | currency:'USD'}}</span>
+            </div>
+            <div class="reward-price">
+              <span>{{rewardItem.price | currency:'USD'}}</span>
             </div>
             <span *ngIf="rewardItem.selected" [ngClass]="{'selected-reward': rewardItem.selected}">SELECTED</span>
           </div>

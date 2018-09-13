@@ -1,6 +1,7 @@
 @import '~styles.scss';
 
-$rewardHeight: 75px;
+$rewardHeight: 80px;
+$rewardWidth: 360px;
 
 
 .reward-search {
@@ -25,17 +26,17 @@ $rewardHeight: 75px;
         padding-bottom: .5em;
 
         .zero-magnitude {
-            height: $rewardHeight*1.25;
+            height: $rewardHeight;
             width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right{
-                width: 250px;
+                width: $rewardWidth;
             }
             
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight * 1.25 $rewardHeight * 1.25;
+                border-width: 0 0 $rewardHeight $rewardHeight;
                 width: 35px;
             }
         }
@@ -47,11 +48,11 @@ $rewardHeight: 75px;
             flex-direction: row;    
 
             .carousel-item-right {
-                width: 180px;
+                width: $rewardWidth * .90;
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight*0.95 $rewardHeight*0.95;
+                border-width: 0 0 $rewardHeight * 0.95 $rewardHeight * 0.95;
                 width: 31px;
             }
         }
@@ -63,7 +64,7 @@ $rewardHeight: 75px;
             flex-direction: row;
 
             .carousel-item-right {
-                width: 160px;
+                width: $rewardWidth * .80;
             }
 
             .carousel-item-left {
@@ -79,7 +80,7 @@ $rewardHeight: 75px;
             flex-direction: row;
 
             .carousel-item-right {
-                width: 140px;
+                width: $rewardWidth * 0.70;
             }
 
             .carousel-item-left {
@@ -87,6 +88,40 @@ $rewardHeight: 75px;
                 width: 23px;
             }
         }
+        
+        .four-magnitudes {
+            height: $rewardHeight * .80;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            .carousel-item-right {
+                width: $rewardWidth * 0.60;
+            }
+
+            .carousel-item-left {
+                border-width: 0 0 $rewardHeight*0.80 $rewardHeight*0.80;
+                width: 19px;
+            }
+        }
+
+        .five-magnitudes {
+            height: $rewardHeight * .75;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            .carousel-item-right {
+                width: $rewardWidth * 0.50;
+            }
+
+            .carousel-item-left {
+                border-width: 0 0 $rewardHeight*0.75 $rewardHeight*0.75;
+                width: 15px;
+            }
+        }
+
+
 
         .carousel-item-left {
             height: 0;
@@ -99,30 +134,35 @@ $rewardHeight: 75px;
         .carousel-item-right {
             border: 4px solid $greenBackgroundColor;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             background-color: $greenBackgroundColor;
 
-            .time-remaining {
-                font-size: $small;
-                font-weight: $normal;
-                color: $lightGreen;
-            }
-
-            .reward-name-price {
+            .reward-time-name {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
+                width: 70%;
                 
                 .reward-name {
                     font-size: $large;
                     font-weight: $semiBold;
                     color: $lightGreen;
                 }   
-
-                .reward-price {
+                .time-remaining {
                     font-size: $small;
                     font-weight: $normal;
-                    color: $darkBlue;
-                    text-align: right;
+                    color: $lightGreen;
+                }
+            }
+
+            .reward-price {
+                font-size: $small;
+                font-weight: $normal;
+                color: $darkBlue;
+                text-align: right;
+                width: 30%;
+                
+                .reward-price span {
+                    
                 }
             }
         }

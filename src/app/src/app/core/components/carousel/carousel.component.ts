@@ -205,7 +205,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   getClass(currentPosition: number, index: number): string {
     const distance = Math.abs(index - currentPosition);
-    
+
     switch (distance) {
       case(0): {
         return 'zero-magnitude';
@@ -216,8 +216,14 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       case(2): {
         return 'two-magnitudes';
       }
-      default: {
+      case(3): {
         return 'three-magnitudes';
+      }
+      case(4): {
+        return 'four-magnitudes';
+      }
+      default: {
+        return 'five-magnitudes';
       }
     }
   }
