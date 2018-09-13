@@ -270,10 +270,12 @@ $rewardWidth: 360px;
   }
 
   .bottom-container {
+    font-family: 'SharpGroteskLight09';
     height: 50%;
     display: flex;
     align-items: flex-end;
-    color: red;
-    font-size: 2em;
+    color: #ef3930;
+    font-size: 80px;
+    transform: skewY(-20deg);
   }
 }

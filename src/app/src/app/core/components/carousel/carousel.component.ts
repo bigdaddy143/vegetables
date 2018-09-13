@@ -56,7 +56,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     this.currentAmount = 1000;
 
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
-    const pp = this.scrollable.getElementRef().nativeElement;
     el.scrollIntoView({behavior: "instant", block: "center", inline: "nearest"});
     // this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
@@ -72,8 +71,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       // if scrollTop of target is higher than previous it is a scroll down
       if (elem.target.scrollTop > this.currentScrollTop) {
         const newReward = this.carouselItems[scrolledIndex + 1];
+        this.currentScrolledIndex ++;        
         this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
-        this.currentScrolledIndex ++;
       } else {
         // else scroll up
         const newReward = this.carouselItems[scrolledIndex - 1];
@@ -129,7 +128,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   setPercentToAchievement() {
-    this.percentToAchievement = _.round(this.currentAmount / this.selectedReward.price);
+    this.percentToAchievement = _.round(this.currentAmount / this.selectedReward.price, 2) * 100;
   }
 
   updateProgressAmount() {
@@ -164,7 +163,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
     //updates the fill amount of the scroll bar to indicate the amount
     this.updateProgressAmount();
-
+    this.setPercentToAchievement();
     // set new percentage height of rewards
     this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
   }
