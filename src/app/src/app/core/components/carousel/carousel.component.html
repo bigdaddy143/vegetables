@@ -19,10 +19,7 @@
   <ng-container *ngIf="carouselItems && carouselItems.length > 0">
     <div [id]="rewardItem.rewardId" *ngFor="let rewardItem of carouselItems; let i=index">
       <div (click)="openDialog(rewardItem)" class="carousel-item">
-        <div [ngClass]="{ 'zero-magnitude': getClass(currentScrolledIndex,i)==='zero' , 'one-magnitude': getClass(currentScrolledIndex,i)==='one',
-        'two-magnitudes': getClass(currentScrolledIndex,i)==='two', 'three-magnitudes': getClass(currentScrolledIndex,i)==='three'
-        }">
-
+        <div [ngClass]="getClass(currentScrolledIndex,i)">
           <div class="carousel-item-left">
           </div>
           <div class="carousel-item-right">

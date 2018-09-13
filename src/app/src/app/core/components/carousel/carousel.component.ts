@@ -59,29 +59,24 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   handleScroll(elem): void {
 
     if (this.scrollCounter === this.scrollSpeed) {
-
       //set scroll counter back to 0
       this.scrollCounter = 0;
-      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-      // .classList.remove('item-scrolled-to');
-
       const currentlyScrolledTo = this.scrolledToReward;
-      this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
+      const scrolledIndex = this.carouselItems.findIndex(r => r.rewardId === currentlyScrolledTo.rewardId);
       // if scrollTop of target is higher than previous it is a scroll down
       if (elem.target.scrollTop > this.currentScrollTop) {
-        const newReward = this.carouselItems[this.currentScrolledIndex + 1];
+        const newReward = this.carouselItems[scrolledIndex + 1];
         this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
+        this.currentScrolledIndex ++;
       } else {
         // else scroll up
-        const newReward = this.carouselItems[this.currentScrolledIndex - 1];
+        const newReward = this.carouselItems[scrolledIndex - 1];
+        this.currentScrolledIndex --;
         this.scrolledToReward = newReward ? newReward : this.scrolledToReward;
       }
 
-      // this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId)
-      //   .classList.add('item-scrolled-to');
-
     const el = this.scrollable.getElementRef().nativeElement.children.namedItem(this.scrolledToReward.rewardId);
-    el.scrollIntoView({behavior: "auto", block: "center", inline: "nearest"});
+    el.scrollIntoView({behavior: "instant", block: "center", inline: "nearest"});
     this.currentScrollTop = elem.target.scrollTop;
     this.cdRef.detectChanges();
     } else {
@@ -105,6 +100,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     // .subscribe(rewards => {
     //   this.carouselItems = rewards;
     // });
+
     this.highestRewardPrice = this._rewardService.getHighestRewardPrice(this.carouselItems);
     this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
     this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
@@ -206,20 +202,22 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     }
     );
   }
+
   getClass(currentPosition: number, index: number): string {
     const distance = Math.abs(index - currentPosition);
+    
     switch (distance) {
       case(0): {
-        return 'zero';
+        return 'zero-magnitude';
       }
       case(1): {
-        return 'one';
+        return 'one-magnitude';
       }
       case(2): {
-        return 'two';
+        return 'two-magnitudes';
       }
       default: {
-        return 'three';
+        return 'three-magnitudes';
       }
     }
   }

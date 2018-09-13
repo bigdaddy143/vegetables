@@ -12,8 +12,9 @@ const createWindow = () => {
   setTimeout(() => {
     // Create the browser window.
     win = new BrowserWindow({
-      width: 800,
-      height: 600,
+      // resizable: false,
+      width: 1216,
+      height: 766,
       icon: './src/favicon.ico',
       webPreferences: {
         nodeIntegration: false // turn it on to use node features
