@@ -13,7 +13,8 @@ $rewardHeight: 75px;
     height: 60%;
     width: 100%;
     overflow-y: scroll;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     
     .carousel-item {
         cursor: pointer;
@@ -24,17 +25,17 @@ $rewardHeight: 75px;
         padding-bottom: .5em;
 
         .zero-magnitude {
-            height: $rewardHeight;
+            height: $rewardHeight*1.25;
             width: 100%;
             display: flex;
             flex-direction: row;
 
             .carousel-item-right{
-                width: 200px;
+                width: 250px;
             }
             
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight $rewardHeight;
+                border-width: 0 0 $rewardHeight * 1.25 $rewardHeight * 1.25;
                 width: 35px;
             }
         }
@@ -82,7 +83,7 @@ $rewardHeight: 75px;
             }
 
             .carousel-item-left {
-                border-width: 0 0 $rewardHeight * 0.85 $rewardHeight * 0.85;
+                border-width: 0 0 $rewardHeight*0.85 $rewardHeight*0.85;
                 width: 23px;
             }
         }
