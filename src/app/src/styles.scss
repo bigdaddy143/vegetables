@@ -8,11 +8,44 @@ $darkBlue: #0B152E;
 $red: #DE302A;
 
 $small: 8px;
+$smedium: 10px;
 $medium: 12px;
 $mediumLarge: 18px;
 $large: 24px;
 
-$normal: 400;
+$largefont: 48px;
+
+$normal: 300;
 $semiBold: 550;
 $bold: 700;
 $veryBold: 900;
+
+@font-face {
+  font-family: 'sharpGroteskBook19';
+  src: url('assets/fonts/SharpGroteskBook19.otf');
+}
+
+@font-face {
+  font-family: 'sharpGroteskBook25';
+  src: url('assets/fonts/SharpGroteskBook25.otf');
+}
+
+@font-face {
+  font-family: 'SharpGroteskLight05';
+  src: url('assets/fonts/SharpGroteskLight05.otf');
+}
+
+@font-face {
+  font-family: 'sharpGroteskLight09';
+  src: url('assets/fonts/SharpGroteskLight09.otf');
+}
+
+@font-face {
+  font-family: 'sharpGroteskLight25';
+  src: url('assets/fonts/SharpGroteskLight25.otf');
+}
+
+@font-face {
+  font-family: 'sharpGroteskMedium25';
+  src: url('assets/fonts/SharpGroteskMedium25.otf');
+}

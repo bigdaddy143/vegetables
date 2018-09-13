@@ -31,18 +31,25 @@
                 flex-direction: column;
 
                 .current-balance-title {
-                    font-size: $small;
-                    color: whitesmoke;
+                  font-family: 'sharpGroteskBook25';
+                  font-size: $small;
+                  font-weight: $normal;
+                  letter-spacing: 1.3px;
+                  color: whitesmoke;
                 }
 
                 .current-balance-value {
-                    font-size: $large;
+                    font-family: 'sharpGroteskLight09';
+                    font-size: $largefont;
                     color: $lightGreen;
                     font-weight: $normal;
                 }
 
                 .current-balance-currency {
-                    font-size: $small;
+                    font-family: 'sharpGroteskBook25';
+                    font-size: $smedium;
+                    font-weight: $normal;
+                    letter-spacing: 1.6px;
                     color: whitesmoke;
                 }
             }

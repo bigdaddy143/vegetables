@@ -8,6 +8,11 @@ $rewardWidth: 360px;
     padding-bottom: 1em;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
 .carousel{
     display: flex;
     flex-direction: column;
@@ -136,6 +141,7 @@ $rewardWidth: 360px;
             display: flex;
             flex-direction: row;
             background-color: $greenBackgroundColor;
+            width: 100%;
 
             .reward-time-name {
                 display: flex;
@@ -143,14 +149,16 @@ $rewardWidth: 360px;
                 width: 70%;
                 
                 .reward-name {
-                    font-size: $large;
-                    font-weight: $semiBold;
+                    font-size: $largefont;
+                    font-weight: $normal;
+                    font-family: 'SharpGroteskLight09';
                     color: $lightGreen;
                 }   
                 .time-remaining {
-                    font-size: $small;
-                    font-weight: $normal;
-                    color: $lightGreen;
+                  font-family: 'sharpGroteskBook25';
+                  font-size: 8px;
+                  font-weight: $normal;
+                  color: $lightGreen;
                 }
             }
 
@@ -162,7 +170,9 @@ $rewardWidth: 360px;
                 width: 30%;
                 
                 .reward-price span {
-                    
+                    color: $darkBlue;
+                    text-align: right;
+                    align-self: flex-end;
                 }
             }
         }
@@ -199,9 +209,33 @@ $rewardWidth: 360px;
   height: 60%;
   position: relative;
   flex-direction: column;
+  padding-left: 20px;  
 
   .top-container {
+    display: flex;
+    flex-direction: column;
     height: 50%;
+
+    .spinning-salad {
+      font-family: 'sharpGroteskBook25';
+      font-size: $small;
+      letter-spacing: 1.3px;
+      color: #71bf51;
+    }
+
+    .selected-reward{
+      font-family: 'SharpGroteskLight09';
+      font-size: $largefont;
+      font-weight: $normal;
+      color: #ef3930;
+    }
+
+    .spin-rate{
+      font-family: 'sharpGroteskBook25';
+      font-size: $small;
+      letter-spacing: 1.3px;
+      color: #71bf51;
+    }
   }
 
   .bottom-container {
