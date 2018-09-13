@@ -187,14 +187,13 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.position = {
-      right: '50%'
-    };
+    
     dialogConfig.data = {
       reward: reward
     };
-
-    // this.dialog.open(CourseDialogComponent, dialogConfig);
+    dialogConfig.panelClass = 'reward-panel';
+    dialogConfig.height = '200px';
+    dialogConfig.width = '500px';
 
     const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
 
