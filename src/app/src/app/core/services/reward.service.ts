@@ -62,7 +62,8 @@ export class RewardService {
   }
 
   getSelectedReward(rewards: Reward[]): Reward {
-    return rewards.find(r => r.selected);
+    const selected = rewards.find(r => r.selected);
+    return selected ? selected : rewards[_.ceil(rewards.length / 2)];
   }
 
   calculatePlacementPercentage(rewardItemPrice: number, selectedRewardAmount: number, maxRewardAmount: number): number {

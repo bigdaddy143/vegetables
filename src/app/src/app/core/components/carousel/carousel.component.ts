@@ -100,12 +100,18 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   initRewards() {
-    this.carouselItems = this._rewardService.getMockedCarouselRewards(this._userId);
     // this._rewardService.getCarouselRewards(this._userId)
     // .subscribe(rewards => {
     //   this.carouselItems = rewards;
+    //   this.highestRewardPrice = this._rewardService.getHighestRewardPrice(this.carouselItems);
+    //   this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
+    //   this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
+    //   this.currentScrolledIndex = this.carouselItems.findIndex(r => r.rewardId === this.scrolledToReward.rewardId);
+    //   this.updateProgressAmount();
+    //   this.setPercentToAchievement();
     // });
 
+    this.carouselItems = this._rewardService.getMockedCarouselRewards(this._userId);    
     this.highestRewardPrice = this._rewardService.getHighestRewardPrice(this.carouselItems);
     this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
     this.scrolledToReward = this._rewardService.getMiddlePricedReward(this.carouselItems, this.selectedReward);
