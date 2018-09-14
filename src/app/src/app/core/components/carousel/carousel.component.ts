@@ -101,10 +101,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   initRewards() {
     this.carouselItems = this._rewardService.getMockedCarouselRewards(this._userId);
-    // this._rewardService.getCarouselRewards(this._userId)
-    // .subscribe(rewards => {
-    //   this.carouselItems = rewards;
-    // });
 
     this.highestRewardPrice = this._rewardService.getHighestRewardPrice(this.carouselItems);
     this.selectedReward = this._rewardService.getSelectedReward(this.carouselItems);
@@ -128,7 +124,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   setPercentToAchievement() {
-    this.percentToAchievement = _.round(this.currentAmount / this.selectedReward.price, 2) * 100;
+    // this.percentToAchievement = _.round(this.currentAmount / this.selectedReward.price, 2) * 100;
+    const percentage = (this.currentAmount / this.selectedReward.price) * 100;
+    this.percentToAchievement = _.round(percentage, 0);
+
   }
 
   updateProgressAmount() {
@@ -136,7 +135,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.selectedReward.price,
       this.highestRewardPrice);
 
-    const newGradient = 'linear-gradient(to top, #AEC556 '+percentage * 100+'%, transparent 0)';
+    const newGradient = 'linear-gradient(to top, #AEC556 ' + percentage * 100 + '%, transparent 0)';
 
     this.scrollbar.nativeElement.style.background = newGradient;
   }
