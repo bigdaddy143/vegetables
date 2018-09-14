@@ -1,7 +1,7 @@
 @import '~styles.scss';
 
 $rewardHeight: 80px;
-$rewardWidth: 360px;
+$rewardWidth: 350px;
 
 
 .reward-search {
@@ -176,6 +176,7 @@ $rewardWidth: 360px;
             width: 100%;
 
             .reward-time-name {
+                padding-left: 5px;
                 padding-top: 4px;
                 display: flex;
                 flex-direction: column;
