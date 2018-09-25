@@ -1,5 +1,10 @@
 <div class="reward-panel">
+  <div class="redeem">
+      <button mat-stroked-button>Redeem</button>
+      <a (click)='close()' class="close-x">x</a>
+  </div>
   <span class="reward-name">{{data.reward.name}}</span>
+  <span class="reward-details">{{data.reward.details}}</span>
   <div class="button-panel">
     <button class="close-reward"(click)="close()">Close</button>
     <button class="select-reward" *ngIf="!data.selected" (click)="selectReward()">Select Reward</button>

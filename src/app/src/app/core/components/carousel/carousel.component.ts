@@ -50,7 +50,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.handleScroll(elem);
     });
 
-    //TODO: Remove this after its hooked up
+    // TODO: Remove this after its hooked up
     this.scrollCounter = 0;
     this.scrollSpeed = 4;
     this.currentAmount = 1000;
@@ -171,9 +171,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       }
     });
 
-    //updates the fill amount of the scroll bar to indicate the amount
+    // updates the fill amount of the scroll bar to indicate the amount
     this.updateProgressAmount();
     this.setPercentToAchievement();
+
     // set new percentage height of rewards
     this.carouselItems = this._rewardService.mapPercentageHeight(this.carouselItems);
   }

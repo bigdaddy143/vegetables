@@ -7,12 +7,27 @@
 
     .reward-name {
         font-size: $largefont;
-        font-weight: $semiBold;
+        font-weight: $normal;
         font-family: 'SharpGroteskLight09';
-        color: $lightGreen;
+        color: $blueFont;
         align-content: center;
 
     }
+
+    .reward-details {
+        color: $blueFont;
+        font-family: 'SharpGrotesk19';
+        font-size: $small;
+    }
+
+    .close-x {
+        font-weight: $bold;
+        font-size: $medium;
+        color: $blueFont;
+        cursor: pointer;
+        text-align: right;
+    }
+
     .button-panel{
         display: flex;
         flex-direction: row;
